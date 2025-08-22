@@ -1,0 +1,18 @@
+package main
+
+import (
+	"fmt"
+)
+
+type myfloat float64
+
+func (f myfloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+} //将负数转化为正数
+func main() {
+	f := myfloat(-3)
+	fmt.Println(f.Abs())
+}

@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug simple Go code",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "D:/GOangry/hello-world.go",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

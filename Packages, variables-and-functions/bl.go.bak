@@ -1,0 +1,12 @@
+package main
+
+import (
+	"fmt"
+)
+
+var i, python, java bool = true, true, true
+
+func main() {
+	var k, l, b int = 1, 2, 3
+	fmt.Println(i, python, java, k, l, b)
+}

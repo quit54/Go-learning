@@ -1,0 +1,43 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type Abser interface {
+	Abs() float64 //接口里面包含着函数
+} //接口在面对两个函数但是同一命名的时候，这个时候的接受就是语句接收的参数类型
+// 因为接受的参数类型不同，所以结果会不同
+func main() {
+	var a Abser //这里对a进行的明明操作就是接口明明
+	f := myfloat(math.Sqrt2)
+	v := vertex{3, 4}
+
+	a = f // a MyFloat 实现了 Abser
+	fmt.Println(a.Abs())
+	a = &v // a *Vertex 实现了 Abser
+
+	// 下面一行，v 是一个 Vertex（而不是 *Vertex）
+	// 所以没有实现 Abser。
+	a = v //所以要尝试实现Abser，这个时候就是错误的
+
+	fmt.Println(a.Abs())
+}
+
+type myfloat float64
+
+func (f myfloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+type vertex struct {
+	X, Y float64
+}
+
+func (v *vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+} //接受指针类参数

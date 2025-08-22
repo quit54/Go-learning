@@ -1,0 +1,23 @@
+// geektutu.com
+// main.go
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	r := gin.Default() //首先使用gin.Default生成了一个实例，这个实例即为WSGI
+	//WSGI应用程序
+	r.GET("/", func(c *gin.Context) { //其次使用r.GET声明一个路由，告诉Gin什么样的URL能触发传入的函数，
+		//这个函数返回我们想要显示在用户浏览器中的信息
+		c.String(200, "i love you")
+	})
+	r.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Who are you?")
+	})
+	//最后使用r.Run()来让应用运行在本地服务器上，默认端口位_8080_
+	r.Run()
+}

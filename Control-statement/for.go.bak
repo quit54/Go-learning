@@ -1,0 +1,18 @@
+package main
+
+import "fmt"
+
+func main() {
+	sum := 1
+	for sum < 10 {
+		sum += sum
+	} //这里是for函数的左右省略
+	fmt.Printf("%d  这是你要的数字\n", sum)
+	for sum < 20 {
+		sum += sum
+	} //在GO语言中没有while函数，while函数被for函数取代
+	fmt.Printf("%d  这是你要的数字\n", sum)
+	if sum > 0 {
+		fmt.Printf("%d  这是你要的数字\n", sum)
+	}
+}

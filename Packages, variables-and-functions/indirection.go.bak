@@ -1,0 +1,24 @@
+package main
+
+type vertex struct {
+	x, y float64
+}
+
+func (v *vertex) scale(f float64) {
+	v.x = v.x * f
+	v.y = v.y * f
+} //方法函数，没有返回值
+func scalefunc(v *vertex, f float64) {
+	v.x = v.x * f
+	v.y = v.y * f
+} //这两个函数区别就是，括号中的接受函数能够接收到需要的
+func main() {
+	v := vertex{3, 4} //v是一个数据结构
+	v.scale(2)
+	scalefunc(&v, 10) //这里接受数据类型，所以有&号
+
+	p := &vertex{4, 3} //p是一个指针
+	p.scale(3)
+	scalefunc(p, 8) //这里接受的是指针，因此没有*符号
+
+}

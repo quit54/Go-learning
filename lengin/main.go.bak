@@ -1,0 +1,100 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"math/rand"
+	"net/http"
+	"time"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
+
+type User struct {
+	gorm.Model
+	Name      string `gorm:"type:vachar(20)";not null`
+	Telephone string `gorm:"vachar(110;not null;unique"`
+	Password  string `gorm:"size:255;not null"`
+}
+
+func main() {
+	r := gin.Default()
+	dp := IntDB()
+	defer dp.Close()
+	r.POST("/api/auth/register", func(ctx *gin.Context) {
+		//获取参数
+		name := ctx.PostForm("name")
+		telephone := ctx.PostForm("telephone")
+		password := ctx.PostForm("password")
+		//数据验证
+		if len(telephone) != 11 {
+			ctx.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "手机号必须为11位"})
+			return
+		}
+		if len(password) < 6 {
+			ctx.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "密码不能少于6位"})
+			return
+		}
+		//如果名称没有传,或者传空，就给一个随即10位的字符串
+		if len(name) == 0 {
+			name = RandomString(10)
+		}
+		log.Println(name, telephone, password)
+		//判断手机号是否存在，需要查库
+		if istelephone(dp, telephone) {
+			ctx.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "用户已经存在"})
+			return
+		}
+		//创建用户
+		newuser := User{
+			Name:      name,
+			Telephone: telephone,
+			Password:  password,
+		}
+		dp.Create(&newuser)
+		//返回结果
+		ctx.JSON(200, gin.H{
+			"message": "你被逮捕了",
+		})
+	})
+	panic(r.Run(":8080"))
+}
+
+func RandomString(n int) string {
+	letters := []byte("askjdkjgoiensGOIWoisdlt") // 修正初始化方式
+	result := make([]byte, n)
+	r := rand.New(rand.NewSource(time.Now().Unix()))
+	for i := range result {
+		result[i] = letters[r.Intn(len(letters))]
+	}
+	return string(result)
+}
+func istelephone(dp *gorm.DB, telephone string) bool {
+	var user User
+	dp.Where("telephone = ?", telephone).First(&user)
+	if user.ID != 0 {
+		return true
+	}
+	return false
+}
+func IntDB() *gorm.DB {
+	driverName := "mysql"
+	username := "李浩野"
+	host := "localhost"
+	port := "3306"
+	database := "root"
+	password := "root"
+	arg := fmt.Sprintf("%s:%s\n%s\ndatabase=%s\nport=%s\npassword=%s\n",
+		driverName,
+		host,
+		database,
+		port,
+		password)
+
+	dp, err := gorm.Open(username, arg) //这里映射的接口是username和arg
+	if err != nil {
+		panic("failed to contect database ,err : " + err.Error())
+	}
+	return dp
+}

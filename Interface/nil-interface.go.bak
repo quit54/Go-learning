@@ -1,0 +1,18 @@
+package main
+
+import "fmt"
+
+type I interface {
+	M()
+}
+
+func main() {
+	var i I
+	describe(i)
+	i.M()
+}
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+
+//首先M这个并不是一个可执行的接口，接口为空，因此无法使用

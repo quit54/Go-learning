@@ -1,0 +1,33 @@
+/*
+package main
+
+import (
+	"fmt"
+)
+
+func add(a, b int) int {
+	return a + b
+}
+func main() {
+	fmt.Print(add(4, 6))
+}
+
+*/
+/*
+	Starting: C:\Users\27837\go\bin\dlv.exe dap --listen=127.0.0.1:59175 from d:\GO语言编程
+	表明调试工具dlv正在启动，并且指出正在从指定的目录d:\GO语言编程中运行
+	dap表示调试适配器的协议，并且dlv正在监听本地主机59175端口
+
+
+Type 'dlv help' for list of commands.
+告诉用户可以输入dlv help指令来查看支持的调试命令列表
+
+这里表示被调用的进程（ID为18056）已经正常退出，退出状态码为0
+
+
+Detaching表示进程已经结束，并且调试器不再被监控调试的进程
+
+
+dlv dap (15000) exited with code: 0
+表示dlv的DAP服务进程已经正常退出，退出状态为0
+*/

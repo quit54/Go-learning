@@ -1,0 +1,21 @@
+package main
+
+import "fmt"
+
+func main() {
+	var i interface{} = "hello"
+
+	s := i.(string)
+	fmt.Println(s)
+
+	s, ok := i.(string) //这里是成功了
+	fmt.Println(s, ok)  //可以命名两个变量，来判断一个接口值是否保存了一个特定的类型
+	//其底层数值，以及一个判断是否成功的布尔值
+
+	f, ok := i.(float64) //这里是失败了，接口i中没有float64这一数据类型
+	//会触发一个panic语句，触发报告
+	fmt.Println(f, ok) //再继续输出，这里的输出为0
+
+	f = i.(float64)
+	fmt.Println(f)
+}

@@ -1,0 +1,24 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type vertex struct {
+	x, y float64
+}
+
+func (v vertex) Abs() float64 {
+	return math.Sqrt(v.x*v.x + v.y*v.y)
+}
+func (v *vertex) scale(f float64) float64 { //第一个小括号代表数据类型，第二个小括号代表接收的参数，后面的float64就是返回的意思
+	v.x = v.x * f
+	v.y = v.y * f
+	return f
+} //方法，接受指针，然后改变指针的数值
+func main() {
+	v := vertex{3, 4}
+	fmt.Println(v.scale(10)) //当没有指针的接受之后，会按值传递，接受副本，但是并不影响v内部真正储存的数值
+	fmt.Println(v.Abs())
+}

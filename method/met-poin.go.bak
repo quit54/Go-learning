@@ -1,0 +1,25 @@
+package main
+
+import (
+	"fmt"
+	"math"
+) //调用两个库，第一个格式化输出输入，第二个调用数学函数
+
+type Vertex struct {
+	X, Y float64
+}
+
+// 方法就是一类特殊的带有接收者的函数
+func (v Vertex) Abs() float64 { //这里就是方法函数的命名
+	return math.Sqrt(v.X*v.X + v.Y*v.Y) //返回当前数据结构的两个数据的二次方相加
+} //前面是输入的数据结构，中间是函数名称，后面是函数返回的数据类型
+func (v *Vertex) Scale(f float64) {//这被称为方法，方法即函数
+	v.X = v.X * f
+	v.Y = v.Y * f
+	//最大区别是，没有return，也就是函数没有返回值
+} //这里，接收的是函数的指针，然后是函数名称，对指向数据的指针进行操作，并不是返回f数据，而是后续接收
+func main() {
+	v := Vertex{3, 4} //数据命名，
+	v.Scale(10)//数据发生改变，
+	fmt.Println(v.Abs())//根据勾股定理，求出斜边数值
+}

@@ -1,0 +1,17 @@
+go语言第一学：接口的隐式实现机制和反射
+在go语言中，接口是一种定义行为的方式，接口定义如下：
+type Stringer interface {
+    String() string
+}
+Stringer接口要求实现一个名为string的方法，返回一个string
+任何类型只需要实现string()方法，就隐式地实现stringer接口，不需要显示声明
+func (p Person) String() string {
+    return fmt.Sprintf("%v (%v years)", p.Name, p.Age)
+}
+Person 类型通过实现 String() 方法，隐式地实现了 Stringer 接口。
+6. 类比解释
+可以将 fmt 包的行为类比为一个餐厅的点餐系统：
+Stringer 接口：相当于餐厅的菜单，规定了可以点的菜品（String() 方法）。
+Person 类型：相当于顾客，只要提供了菜单上的菜品（实现了 String() 方法），就可以点餐。
+fmt 包：相当于服务员，会检查顾客是否提供了菜单上的菜品（通过反射检查接口实现），如果有，就直接上菜（调用 String() 方法）。
+过于贴切跟强大了
