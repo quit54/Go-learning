@@ -6,7 +6,7 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "D:/GOangry/hello-world.go",
+            "program": "${file}",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}"
         }
