@@ -3,26 +3,26 @@
 ### go语言的起点，什么叫做module？
 - module是包的集合，包是一堆离散而有用的函数的集合，可以单独创建分别负责不同模块功能的包，之后将包进行集合为module的utils工具，之后任何调用可以通过调用这个module的函数，来直接使用。
 ### module内涵内容
-module指定运行代码所需的依赖项，包括Go版本和它所需的其他模块集，在调用的时候发挥作用。
+- module指定运行代码所需的依赖项，包括Go版本和它所需的其他模块集，在调用的时候发挥作用。
 ### module指令集合
-1. '''go mod init + (module名称)'''初始化命令,会生成一个go.mod文件，关联依赖项，一开始文件只包含module的模型和GO语言版本，后面可增加依赖项。
-2. '''$ go mod edit -replace example.com/greetings=../greetings'''go语言编辑指令
-3. '''$ go mod tidy   go: found example.com/greetings in example.com/greetings v0.0.0-00010101000000-000000000000'''go语言tidy指令，同步example.com/hello模块的依赖项，增加本地指令
+1. ```go mod init + (module名称)```初始化命令,会生成一个go.mod文件，关联依赖项，一开始文件只包含module的模型和GO语言版本，后面可增加依赖项。
+2. ```go mod edit -replace example.com/greetings=../greetings```go语言编辑指令
+3. ```go mod tidy   go: found example.com/greetings in example.com/greetings v0.0.0-00010101000000-000000000000```go语言tidy指令，同步example.com/hello模块的依赖项，增加本地指令
 ### （卡点）module应用解析
 - 为了保重我的每一个module模型正常运行，需要反复使用go mod init,为代码创建依赖项跟踪。
 - 当你想在一个main包中调用其他module的代码时，需要做的是：import{"fmt"标准库,"example.com/greetings"其他module的名称}
 - 这样你才可以调用其他module的函数，编辑example.com/hello模块以使用本地的example.com/greetings模块。其中greetings包是存放各种工具的，hello是调用工具的。
 **这里设立greetings的module模型之后，还需要对go.mod文件进行重新编辑，将Go工具从模块路径（模块不存在的地方）重定向到本地目录（模块所在的地方），编辑module为了之后它可以在本地文件系统被调用**
-'''
+```
 module example.com/hello
 
 go 1.16
 
 replace example.com/greetings => ../greetings #依赖项 
-'''
-这里达到设立依赖项的目的。
+```
+- 这里达到设立依赖项的目的。
 **之后，$ go mod tidy指令，向模型提供一个需要指令，才可以运行。**
-'''
+```
 module example.com/hello
 
 go 1.16
@@ -30,7 +30,7 @@ go 1.16
 replace example.com/greetings => ../greetings
 
 require example.com/greetings v0.0.0-00010101000000-000000000000
-'''
+```
 - 在hello.go调用greetings的时候，会创建依赖项的。模块路径后面的数字是一个伪版本号——一个生成的数字，用来代替语义版本号（模块还没有）。
 - 最终，使用一个带有版本号标签的require指令。
 # 总结module与依赖项的关系
