@@ -1,7 +1,7 @@
-module he
+module example.com/hello
 
-replace example.com/greetings => ../greeting
+replace example.com/greetings => ../greetings
 
-require example.com/greetings v0.0.0 // 这是一个伪版本号，因为模块在本地
+require example.com/greetings v0.0.0
 
 go 1.24.1

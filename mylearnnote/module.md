@@ -1,3 +1,4 @@
+# 学习序号：1
 # GO语言module精粹（参照zerotolearngo目录）
 *参考文档：(https://golang.google.cn/doc/tutorial/call-module-code,"官方技术文档")*
 ### go语言的起点，什么叫做module？
@@ -9,10 +10,10 @@
 2. ```go mod edit -replace example.com/greetings=../greetings```go语言编辑指令
 3. ```go mod tidy   go: found example.com/greetings in example.com/greetings v0.0.0-00010101000000-000000000000```go语言tidy指令，同步example.com/hello模块的依赖项，增加本地指令
 ### （卡点）module应用解析
-- 为了保重我的每一个module模型正常运行，需要反复使用go mod init,为代码创建依赖项跟踪。
+- 为了保证我的每一个module模型正常运行，需要反复使用go mod init,为代码创建依赖项跟踪。
 - 当你想在一个main包中调用其他module的代码时，需要做的是：import{"fmt"标准库,"example.com/greetings"其他module的名称}
 - 这样你才可以调用其他module的函数，编辑example.com/hello模块以使用本地的example.com/greetings模块。其中greetings包是存放各种工具的，hello是调用工具的。
-**这里设立greetings的module模型之后，还需要对go.mod文件进行重新编辑，将Go工具从模块路径（模块不存在的地方）重定向到本地目录（模块所在的地方），编辑module为了之后它可以在本地文件系统被调用**
+**这里设立greetings的module模型之后，还需要对go.mod文件进行重新编辑，将Go工具从模块路径（默认网址，模块不存在的地方）重定向到本地目录（模块所在的地方，本地文件），编辑module为了之后它可以在本地文件系统被调用**
 ```
 module example.com/hello
 
