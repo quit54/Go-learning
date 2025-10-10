@@ -6,9 +6,9 @@ import "fmt"
 //其次，iota的意思是按照顺序叠加,与const表示枚举类型，默认值为零，被应用在const里面
 //iota是一种叠加的数据概念，在不断+1改变
 const (
-	BEIJING  = 10 * iota //iota = 0
-	SHANGHAI             //iota = 1
-	SHENZHEN             //iota = 2
+	BEIJING  = iota //iota = 0
+	SHANGHAI        //iota = 1
+	SHENZHEN        //iota = 2
 )
 
 //这里的常量是不允许修改的
@@ -26,5 +26,5 @@ const (
 
 func main() {
 	fmt.Println(BEIJING, SHANGHAI, SHENZHEN)
-	fmt.Println(g, k, m, n)
+	fmt.Println(a, b, c, d, e, f, g, k, m, n)
 }
