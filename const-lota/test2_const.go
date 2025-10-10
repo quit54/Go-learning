@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 //首先const属性和C语言一样，是只读属性
-//其次，iota的意思是按照顺序叠加，默认值为零，被应用在const里面
+//其次，iota的意思是按照顺序叠加,与const表示枚举类型，默认值为零，被应用在const里面
 //iota是一种叠加的数据概念，在不断+1改变
 const (
 	BEIJING  = 10 * iota //iota = 0
