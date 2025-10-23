@@ -1,6 +1,6 @@
 module example.com/hello
 
-replace example.com/greetings => ../greetings
+replace example.com/greetings => ./greetings
 
 require example.com/greetings v0.0.0
 
