@@ -23,3 +23,5 @@ func main() {
 	}
 	fmt.Println("主进程结束")
 }
+
+//与此同时channel还是可以及时关闭的
