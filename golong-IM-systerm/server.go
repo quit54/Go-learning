@@ -41,7 +41,8 @@ func (this *Server) ListenMessage() {
 	}
 }
 
-// 广播消息的方法
+// 广播消息的方法，广播一个什么样子的消息
+// 这里的广播消息，是在已经上线的用户（不包含新上线用户）中，还是在新上线的用户中，还是所有在线用户？
 func (this *Server) BroadCast(user *User, msg string) {
 	Sendmsg := "[" + user.Addr + "]" + user.Name + ":" + msg
 
