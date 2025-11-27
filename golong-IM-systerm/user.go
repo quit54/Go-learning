@@ -28,6 +28,6 @@ func (this *User) ListenMessage() {
 	for {
 		msg := <-this.C
 
-		this.Conn.Write([]byte(msg + "\n"))
+		this.Conn.Write([]byte(msg))
 	}
 }
