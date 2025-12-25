@@ -89,7 +89,7 @@ func (this *Server) Handler(conn net.Conn) {
 			//当前用户活跃，应重置定时器
 			//不用做任何事情，为了激活select
 
-		case <-time.After(time.Second * 20):
+		case <-time.After(time.Second * 100):
 			//已经超时，将会强制关闭user
 			user.Sendmsg("你被踢出")
 			//销毁用户资源
