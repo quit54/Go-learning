@@ -111,6 +111,7 @@ func (this *User) DoMessage(msg string) {
 		remoteUser.Sendmsg(this.Name + "对您说的内容：" + content)
 
 	} else {
+		msg = fmt.Sprintf("[%s]:%s\n", this.Name, msg)
 		this.server.BroadCast(this, msg)
 	}
 }
