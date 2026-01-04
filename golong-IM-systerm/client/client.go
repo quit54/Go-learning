@@ -95,7 +95,6 @@ func (client *Client) PrivateChat() {
 		fmt.Println("请输入当前聊天对象的用户名,exit表示退出")
 		fmt.Scanln(&remoteName)
 	}
-
 }
 func (client *Client) UpdateName() bool {
 	fmt.Println(">>>>>>请输入用户名:")
